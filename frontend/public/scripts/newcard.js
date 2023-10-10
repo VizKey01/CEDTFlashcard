@@ -38,7 +38,7 @@ async function displayFlashcards() {
           deleteButton.classList.add('delete-button');
           deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
 
-          deleteButton.onclick = async function () {
+          deleteButton.onclick = function () {
             showDeletePopup();
           
             // Handle the "No" button click
@@ -51,16 +51,20 @@ async function displayFlashcards() {
               try {
                 hideDeletePopup();
           
-                // Send a delete request to the server to remove the flashcard from the database
-                const response = await fetch(`/flashcards/${index}`, {
+                // ดึงค่า ID ของ Flashcard ที่ต้องการลบ
+                const flashcardId = flashcard._id; // ให้ flashcard มี property _id ตามข้อมูลที่มีใน MongoDB
+          
+                // ส่งคำขอ DELETE ไปยัง API Endpoint ที่เชื่อมต่อกับ MongoDB
+                const deleteResponse = await fetch(`/flashcards/${flashcardId}`, {
                   method: 'DELETE',
                 });
           
-                if (response.ok) {
+                if (deleteResponse.ok) {
+                  // ถ้าลบสำเร็จ
                   // Remove the deleted flashcard-content from the DOM
-                  flashcardContent.remove();
+                  flashcardContent.remove(); // Remove the deleted flashcard-content element
                 } else {
-                  console.error('Error deleting flashcard:', response.statusText);
+                  console.error('Error deleting flashcard:', deleteResponse.statusText);
                   // Handle error if needed
                 }
               } catch (error) {
@@ -69,6 +73,8 @@ async function displayFlashcards() {
               }
             });
           };
+          
+          
           
 
           flashcardContent.appendChild(h3);
@@ -177,7 +183,12 @@ addTodoButton.addEventListener('click', addTodo)
 
 
 
-
+function clearFlashcardContainer() {
+  const flashcardContainer = document.querySelector('.flashcard-container');
+  while (flashcardContainer.firstChild) {
+    flashcardContainer.firstChild.remove();
+  }
+}
 
 //---------------summit flashcard---------------
 // ...
@@ -247,55 +258,10 @@ document.querySelector('#createnewcard').addEventListener('click', async functio
 
         // เมื่อบันทึกสำเร็จ, ทำตามการแสดงผลหรือการจัดการข้อมูลเพิ่มเติมตามที่คุณต้องการ
         console.log('บันทึก Flashcard สำเร็จ');
+        clearFlashcardContainer();
+        displayFlashcards();
 
-
-
-        // หากคุณต้องการเพิ่มข้อมูลลงใน flashcard-content
-        const flashcardContainer = document.querySelector('.flashcard-container');
-
-        // สร้าง div ใหม่สำหรับ flashcard-content
-        const flashcardContent = document.createElement('div');
-        flashcardContent.classList.add('flashcard-content');
-
-
-        // สร้าง h3 สำหรับ Flashcard Title
-        const h3 = document.createElement('h3');
-        h3.textContent = title;
-
-
-        // สร้าง button สำหรับ Edit
-        const editButton = document.createElement('button');
-        editButton.classList.add('edit-button');
-        editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
-
-        // สร้าง button สำหรับ Delete
-        const deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-button');
-        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-
-        // สร้าง div ใหม่สำหรับ flashcard-text
-        const flashcardtext = document.createElement('div');
-        flashcardtext.classList.add('adjusts');
-
-        // สร้าง p สำหรับ Flashcard Description
-        const p = document.createElement('p');
-        p.textContent = description;
-
-        // เพิ่ม elements ลงใน flashcardtext
-        flashcardtext.appendChild(p);
-
-        // const descriptiontext = document.createElement('div');
-        //   descriptiontext.classList.add('adjusts');
-        //   descriptiontext.appendChild(p);
-
-        // เพิ่ม elements ลงใน flashcardContent
-        flashcardContent.appendChild(h3);
-        flashcardContent.appendChild(flashcardtext);
-        flashcardContent.appendChild(editButton);
-        flashcardContent.appendChild(deleteButton);
-
-        // เพิ่ม flashcardContent ลงใน flashcardContainer
-        flashcardContainer.appendChild(flashcardContent);
+        
 
         // หลังจากเพิ่มข้อมูลลงใน flashcard-content แล้วคุณสามารถล้างค่า input fields ได้เหมือนเดิม
         document.querySelector('.todo-title').value = '';
