@@ -1,4 +1,8 @@
 // Add this code to your frontend JavaScript file (index.html)
+
+
+
+
 async function displayFlashcards() {
   try {
     // ดึงข้อมูล Flashcard จาก API Endpoint ที่สร้างใน index.js
@@ -12,7 +16,7 @@ async function displayFlashcards() {
         // สร้าง Flashcard Content จากข้อมูลที่ได้มาจาก MongoDB
         const flashcardContainer = document.querySelector('.flashcard-container');
 
-        flashcards.forEach((flashcard) => {
+        flashcards.forEach((flashcard, index) => {
           const flashcardContent = document.createElement('div');
           flashcardContent.classList.add('flashcard-content');
 
@@ -33,7 +37,40 @@ async function displayFlashcards() {
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete-button');
           deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+
+          deleteButton.onclick = async function () {
+            showDeletePopup();
           
+            // Handle the "No" button click
+            document.querySelector('#delete-card-no').addEventListener('click', function () {
+              // Hide the delete confirmation popup
+              hideDeletePopup();
+            });
+          
+            document.querySelector('#delete-card-yes').addEventListener('click', async function () {
+              try {
+                hideDeletePopup();
+          
+                // Send a delete request to the server to remove the flashcard from the database
+                const response = await fetch(`/flashcards/${index}`, {
+                  method: 'DELETE',
+                });
+          
+                if (response.ok) {
+                  // Remove the deleted flashcard-content from the DOM
+                  flashcardContent.remove();
+                } else {
+                  console.error('Error deleting flashcard:', response.statusText);
+                  // Handle error if needed
+                }
+              } catch (error) {
+                console.error('Error deleting item:', error);
+                // Handle error if needed
+              }
+            });
+          };
+          
+
           flashcardContent.appendChild(h3);
           flashcardContent.appendChild(descriptiontext);
           flashcardContent.appendChild(editButton);
@@ -41,6 +78,7 @@ async function displayFlashcards() {
 
           flashcardContainer.appendChild(flashcardContent);
         });
+
       } else {
         console.error(result.message);
       }
@@ -209,41 +247,43 @@ document.querySelector('#createnewcard').addEventListener('click', async functio
 
         // เมื่อบันทึกสำเร็จ, ทำตามการแสดงผลหรือการจัดการข้อมูลเพิ่มเติมตามที่คุณต้องการ
         console.log('บันทึก Flashcard สำเร็จ');
-        
-        
+
+
 
         // หากคุณต้องการเพิ่มข้อมูลลงใน flashcard-content
         const flashcardContainer = document.querySelector('.flashcard-container');
-        
+
         // สร้าง div ใหม่สำหรับ flashcard-content
         const flashcardContent = document.createElement('div');
         flashcardContent.classList.add('flashcard-content');
-        
-        // สร้าง div ใหม่สำหรับ flashcard-text
-        const flashcardtext = document.createElement('div');
-        flashcardtext.classList.add('adjusts');
+
 
         // สร้าง h3 สำหรับ Flashcard Title
         const h3 = document.createElement('h3');
         h3.textContent = title;
-        
-        
+
+
         // สร้าง button สำหรับ Edit
         const editButton = document.createElement('button');
         editButton.classList.add('edit-button');
         editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
-        
+
         // สร้าง button สำหรับ Delete
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-button');
         deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-        
+
+        // สร้าง div ใหม่สำหรับ flashcard-text
+        const flashcardtext = document.createElement('div');
+        flashcardtext.classList.add('adjusts');
+
         // สร้าง p สำหรับ Flashcard Description
         const p = document.createElement('p');
         p.textContent = description;
 
         // เพิ่ม elements ลงใน flashcardtext
         flashcardtext.appendChild(p);
+
         // const descriptiontext = document.createElement('div');
         //   descriptiontext.classList.add('adjusts');
         //   descriptiontext.appendChild(p);
@@ -253,15 +293,15 @@ document.querySelector('#createnewcard').addEventListener('click', async functio
         flashcardContent.appendChild(flashcardtext);
         flashcardContent.appendChild(editButton);
         flashcardContent.appendChild(deleteButton);
-        
+
         // เพิ่ม flashcardContent ลงใน flashcardContainer
         flashcardContainer.appendChild(flashcardContent);
-        
+
         // หลังจากเพิ่มข้อมูลลงใน flashcard-content แล้วคุณสามารถล้างค่า input fields ได้เหมือนเดิม
         document.querySelector('.todo-title').value = '';
         document.querySelector('.todo-description').value = '';
-        
-        
+
+
         document.querySelector('.todo-term').value = '';
         document.querySelector('.todo-definition').value = '';
 
@@ -316,12 +356,12 @@ document.querySelectorAll('.delete-button').forEach((deleteButton, index) => {
       try {
         hideDeletePopup();
 
-    // Remove the deleted flashcard-content from the DOM
-    const flashcardContents = document.querySelectorAll('.flashcard-content');
-    flashcardContents[index].remove(); // Remove the deleted flashcard-content element
-  } catch (error) {
-    console.error('Error deleting item:', error);
-    // Handle error if needed
+        // Remove the deleted flashcard-content from the DOM
+        const flashcardContents = document.querySelectorAll('.flashcard-content');
+        flashcardContents[index].remove(); // Remove the deleted flashcard-content element
+      } catch (error) {
+        console.error('Error deleting item:', error);
+        // Handle error if needed
       }
     });
   });

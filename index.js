@@ -99,6 +99,34 @@ app.get('/flashcards', async (req, res) => {
 });
 
 
+// index.js
+// ...
+
+// API Endpoint สำหรับลบ Flashcard โดยใช้ HTTP DELETE
+app.delete('/flashcards/:index', async (req, res) => {
+  try {
+    const { index } = req.params;
+
+    // Find the flashcard by index in the database
+    const flashcard = await Flashcard.findOne().skip(parseInt(index));
+
+    if (!flashcard) {
+      return res.status(404).json({ success: false, message: 'Flashcard not found' });
+    }
+
+    // Remove the flashcard from the database
+    await flashcard.remove();
+
+    res.json({ success: true, message: 'Flashcard deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting flashcard:', error);
+    res.status(500).json({ success: false, message: 'Error deleting flashcard' });
+  }
+});
+
+// ...
+
+
 //------------------------------------
 
 // Start the server

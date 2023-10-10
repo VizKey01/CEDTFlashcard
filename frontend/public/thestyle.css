@@ -413,8 +413,8 @@ body {
 }
 
 .flashcard-content {
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
+  background-color: #f4a942;
+  border: 2.5px solid #e64a19;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -424,18 +424,24 @@ body {
   transition: transform 0.2s ease-in-out 0s;
 }
 
+.flashcard-content:hover {
+  transform: translateY(-5px);
+}
+
 .flashcard-content h3 {
   font-size: 1.2rem;
+  color: white;
 }
 
 .flashcard-content .adjusts {
   min-height: 70px;
   overflow-wrap: break-word;
+  color: wheat;
 }
 
 .edit-button,
 .delete-button {
-  background-color: #333;
+  background-color: #e64a19;
   color: #fff;
   border: none;
   border-radius: 5px;
