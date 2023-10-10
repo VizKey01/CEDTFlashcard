@@ -50,13 +50,13 @@ document.querySelector('#menu-toggle').onclick = () =>{
 
 // delete card section
 
-document.querySelector('.delete-button').addEventListener('click', function () {
-    // document.querySelector('.overlay').style.display = 'block'; // Show the overlay
-    document.querySelector('.delete-popup').classList.add('active');
-});
+// document.querySelector('.delete-button').addEventListener('click', function () {
+//     // document.querySelector('.overlay').style.display = 'block'; // Show the overlay
+//     document.querySelector('.delete-popup').classList.add('active');
+// });
 
-document.querySelector('.close-delete').addEventListener('click', function () {
-    // document.querySelector('.overlay').style.display = 'none'; // Show the overlay
-    document.querySelector('.delete-popup').classList.remove('active');
-});
+// document.querySelector('.close-delete').addEventListener('click', function () {
+//     // document.querySelector('.overlay').style.display = 'none'; // Show the overlay
+//     document.querySelector('.delete-popup').classList.remove('active');
+// });
 

@@ -455,7 +455,7 @@ body {
 
 .delete-popup {
   position: fixed;
-  /* display: none; */
+  display: none;
   top: -200%; 
   left: 50%;
   opacity: 0;
@@ -469,7 +469,7 @@ body {
 }
 
 .delete-popup.active {
-  /* display: block; */
+  display: block;
   top: 50%; 
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
