@@ -22,6 +22,10 @@ async function displayFlashcards() {
           const p = document.createElement('p');
           p.textContent = flashcard.description;
 
+          const descriptiontext = document.createElement('div');
+          descriptiontext.classList.add('adjusts');
+          descriptiontext.appendChild(p);
+
           const editButton = document.createElement('button');
           editButton.classList.add('edit-button');
           editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
@@ -29,9 +33,9 @@ async function displayFlashcards() {
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete-button');
           deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-
+          
           flashcardContent.appendChild(h3);
-          flashcardContent.appendChild(p);
+          flashcardContent.appendChild(descriptiontext);
           flashcardContent.appendChild(editButton);
           flashcardContent.appendChild(deleteButton);
 

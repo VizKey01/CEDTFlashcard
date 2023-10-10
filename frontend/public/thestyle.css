@@ -387,7 +387,7 @@ body {
   padding: 20px;
   overflow: hidden;
   overflow-y: scroll;
-  max-height: 400px;
+  max-height: 390px;
 }
 
 .new-flashcard-button {
@@ -430,6 +430,7 @@ body {
 
 .flashcard-content .adjusts {
   min-height: 70px;
+  overflow-wrap: break-word;
 }
 
 .edit-button,
@@ -441,6 +442,7 @@ body {
   padding: 5px 10px;
   font-size: 0.9rem;
   margin-top: 10px;
+  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -721,13 +723,6 @@ body {
   height: 20px;
   /* left: 240px; */
 }
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-  /* ... (your existing responsive styles) ... */
-}
-
-
 .highlight {
   color: #ff5722;
 }
@@ -959,9 +954,9 @@ footer {
 
 /* Responsive Styles */
 @media screen and (max-width: 1130px) {
-.flashcard {
-    max-width: 500px;
-}
+  .flashcard {
+      max-width: 500px;
+  }
 
 }
 

@@ -125,63 +125,57 @@
         </div>
     </div>
 
+    <div>
     <div class="flashcard-and-user-stats" id="flashcard-content">
-      <!-- User Stats Section -->
-      <div class="user-stats-card">
-        <h2>Profile</h2>
-        <i class="fa-solid fa-user fa-lg" style="padding: 40px;"></i>
-        <div class="user-stats-content">
-          <!-- ********** backend input value ************ -->
-            <p><strong>User Name:</strong> <span class="highlight">Unknown</span></p>
+        <!-- User Stats Section -->
+        <div class="user-stats-card">
+            <h2>Profile</h2>
+            <i class="fa-solid fa-user fa-lg" style="padding: 40px;"></i>
+            <div class="user-stats-content">
+                <!-- ********** backend input value ************ -->
+                <p><strong>User Name:</strong> <span class="highlight">Unknown</span></p>
             <p><strong>Flashcards Created:</strong> <span class="highlight">-</span> Cards</p>
             <p><strong>Flashcards Played:</strong> <span class="highlight">-</span> Cards</p>
             <p><strong>Play Time:</strong> <span class="highlight">-</span> hours</p>
         </div>
     </div>
-
+    
     <!-- Flash card section -->
-      <div class="flashcard">
+    <div class="flashcard">
         <div class="create-new-flashcard-card">
-          <h3>Create New Flash Card</h3>
-          <p>Click below to create a new flash card:</p>
-          <!-- backend editing-->
-          <button class="create-flashcard-button">Create Flashcard</button>
-      </div>
-
+            <h3>Create New Flash Card</h3>
+            <p>Click below to create a new flash card:</p>
+            <!-- backend editing-->
+            <button class="create-flashcard-button">Create Flashcard</button>
+        </div>
+        
         <div class="flashcard-body">
             <div class="flashcard-container">
                 <!-- Flashcard Content -->
                 <!-- frontend, backend editing-->
-                <div class="flashcard-content">
+                <!-- <div class="flashcard-content">
                     <h3>Flashcard Title 1</h3>
                     <div class="adjusts">
                         <p>The description of Flashcard 1. Click to view more.</p>
                     </div>
                     <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
                     <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
-                </div>
-                <div class="flashcard-content">
-                    <h3>Flashcard Title 2</h3>
-                    <div class="adjusts">
-                        <p>The description of Flashcard 2. Click to view more.</p>
+                </div> -->
+                
+                <div class="delete-popup">
+                    <div style="padding-bottom: 20px;">Are you sure to delete?</div>
+                    <div>
+                        <button class="delete-card" id="delete-card">Yes</button>
+                        <button class="close-delete" id="delete-card">No</button>
                     </div>
-                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                 </div>
-
-              <div class="delete-popup">
-                <div style="padding-bottom: 20px;">Are you sure to delete?</div>
-                <div>
-                    <button class="delete-card" id="delete-card">Yes</button>
-                  <button class="close-delete" id="delete-card">No</button>
-                </div>
-              </div>
 
                 <!-- End of Flashcard Content -->
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+</div>
       
       
 
