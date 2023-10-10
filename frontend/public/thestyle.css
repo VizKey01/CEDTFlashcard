@@ -384,6 +384,10 @@ body {
 
 .flashcard-body {
   padding: 20px;
+  padding: 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 400px;
 }
 
 .new-flashcard-button {
@@ -422,6 +426,10 @@ body {
 
 .flashcard-content h3 {
   font-size: 1.2rem;
+}
+
+.flashcard-content .adjusts {
+  min-height: 70px;
 }
 
 .edit-button,
