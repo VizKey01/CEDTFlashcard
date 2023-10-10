@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CEDT Flash card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--<link rel="stylesheet" href="style.css" /> -->
+     <link rel="stylesheet" href="thestyle.css" >
+  </head>
+
+
+  <body>
+    <!-- body -->
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#"><img src="https://i.ibb.co/BgDCW77/Flashcardlogo01.png" alt="Flashcardlogo01" style="border: 0;"></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="/flashcards">Flashcards</a></li>
+                </ul>
+                <div class="login-side">
+                    <button id="show-login1">Login</button>
+                </div>
+            </div>
+            <div class="login-button">
+                <button id="show-login2">Login</button>
+                
+                <div class="profile-icon" id="profile-icon">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <!-- backend popup editing -->
+            <div class="overlay" id="overlay"></div>
+
+            <!-- backend login editing -->
+            <div class="popup">
+                <div class="close-btn">&times;</div>
+                <div class="form">
+                    <h2>Login Form <span class="emoji">🥐</span></h2>
+                    <div class="form-element">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" />
+                    </div>
+
+                    <div class="form-element">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" />
+                    </div>
+
+                    <div class="form-element">
+                        <button type="submit">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+
+  <content>
+
+    <div class="welcome-section">
+        <div class="container">
+            <div class="welcome-content">
+              <!-- ********** backend input value ************ -->
+                <h1>Welcome <span id="usernameee"></span> to CEDT Flashcard</h1>
+                <p>Explore educational flashcards and enhance your learning.</p>
+                <!-- frontend,backend editing-->
+                <button class="new-flashcard-button">Create New Flashcard</button>
+            </div>
+        </div>
+
+        <!-- create new cards -->
+        <div class="createnew-popup">
+            <h5 class="Head">Create New Flashcard</h5>
+            
+            <div class="newbox">
+                <p>
+                    <label for="name">Title</label>
+                    <input class="todo-title" title="text" />
+                </p>
+                <p>
+                    <label for="name">Description</label>
+                    <input class="todo-description" type="text" />
+                </p>
+            </div>
+
+            <div class="newbox">
+                <p>
+                    <label for="term">Term</label>
+                    <input class="todo-term" type="text" />
+                </p>
+                <p>
+                    <label for="definition">Definition</label>
+                    <input class="todo-definition" type="text" />
+                </p>
+
+                <p>
+                    <span class="add-todo" type="button">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </span>
+                </p>
+            </div>
+
+            <p>
+                <span class="back" type="button">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </span>
+            </p>
+
+            <div class="Submit">
+                <button id="createnewcard" type="submit">submit</button>
+            </div>
+
+            <div class="Todo-List">
+                <div class="todo-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flashcard-and-user-stats">
+      <!-- User Stats Section -->
+      <div class="user-stats-card">
+        <h2>Profile</h2>
+        <i class="fa-solid fa-user fa-lg" style="padding: 40px;"></i>
+        <div class="user-stats-content">
+          <!-- ********** backend input value ************ -->
+            <p><strong>User Name:</strong> <span class="highlight">Unknown</span></p>
+            <p><strong>Flashcards Created:</strong> <span class="highlight">-</span> Cards</p>
+            <p><strong>Flashcards Played:</strong> <span class="highlight">-</span> Cards</p>
+            <p><strong>Play Time:</strong> <span class="highlight">-</span> hours</p>
+        </div>
+    </div>
+
+    <!-- Flash card section -->
+      <div class="flashcard">
+        <div class="create-new-flashcard-card">
+          <h3>Create New Flash Card</h3>
+          <p>Click below to create a new flash card:</p>
+          <!-- backend editing-->
+          <button class="create-flashcard-button">Create Flashcard</button>
+      </div>
+
+        <div class="flashcard-body">
+            <div class="flashcard-container">
+                <!-- Flashcard Content -->
+                <!-- frontend, backend editing-->
+                <div class="flashcard-content">
+                    <h3>Flashcard Title 1</h3>
+                    <p>The description of Flashcard 1. Click to view more.</p>
+                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+                </div>
+                <div class="flashcard-content">
+                    <h3>Flashcard Title 2</h3>
+                    <p>The description of Flashcard 2. Click to view more.</p>
+                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+                </div>
+                <div class="flashcard-content">
+                  <h3>Flashcard Title 2</h3>
+                  <p>The description of Flashcard 2. Click to view more.</p>
+                  <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                  <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+              </div>
+
+              <div class="delete-popup">
+                <div style="padding-bottom: 20px;">Are you sure to delete?</div>
+                <div>
+                    <button class="delete-card" id="delete-card">Yes</button>
+                  <button class="close-delete" id="delete-card">No</button>
+                </div>
+              </div>
+
+                <!-- End of Flashcard Content -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+      <!-- Suggesting Cards Section -->
+      <div class="suggestion-cards-container">
+        <div class="suggestion-cards">
+            <h2><i class="fas fa-search"></i> Suggestion Cards</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search flashcards...">
+                <button class="search-button">Search</button>
+            </div>
+            <div class="suggestion-card-container">
+                <!-- Suggestion Cards Here -->
+                <div class="suggestion-card">
+                    <!-- Card Content 1 -->
+                </div>
+                <div class="suggestion-card">
+                    <!-- Card Content 2 -->
+                </div>
+                <div class="suggestion-card">
+                    <!-- Card Content 3 -->
+                </div>
+                <div class="suggestion-card">
+                    <!-- Card Content 4 -->
+                </div>
+                <div class="suggestion-card">
+                    <!-- Card Content 5 -->
+                </div>
+            </div>
+        </div>
+        <div class="show-more">
+            <i class="fas fa-chevron-down"></i> Show More
+        </div>
+    </div>
+
+    
+    <!-- Subscription Plans Section -->
+    <div class="subscription-plans-section">
+      <div class="container">
+          <div class="subscription-plans-content">
+              <h2><i class="fas fa-croissant"></i> Croissants <span class="highlight">ProMax</span> Subscription</h2>
+              <p>Upgrade to Croissants ProMax and enjoy the following special privileges:</p>
+              <ul>
+                  <li><i class="fa-regular fa-circle-check"></i> Create Unlimited Cards.</li>
+                  <li><i class="fa-regular fa-circle-check"></i> No More Annoying Ads.</li>
+                  <li><i class="fa-regular fa-circle-check"></i> Add Pictures to Flashcards.</li>
+                  <li><i class="fa-regular fa-circle-check"></i> Access Special Theme and Icon.</li>
+              </ul>
+              <p>Subscription Pricing:</p>
+              <p><strong>฿39 per month or ฿199 per year</strong></p>
+              <button class="subscription-button">Subscribe Now</button>
+          </div>
+      </div>
+  </div>
+  
+  </content>
+
+  <footer>
+      <div class="container">
+          <div class="about-us" id="about-us">
+              <h2>About Us</h2>
+              <p style="padding: 10px;">Welcome to CEDT Flashcards! We are dedicated to providing high-quality educational flashcards to help you learn and excel in your studies.</p>
+          </div>
+          <div class="footer-grid">
+              <div class="footer-item">
+                  <h3>Contact Us</h3>
+                  <p style="padding-top: 10px;">If you have any questions or feedback, please feel free to reach out:</p>
+                  <ul>
+                      <li>Email: <a href="mailto:contact@yourwebsite.com">6633166821@gmail.com</a></li>
+                      <li>Github: <a href="https://github.com/yourgithub" target="_blank">GitHub</a></li>
+                  </ul>
+              </div>
+              <div class="footer-item">
+                  <h3>Quick Links</h3>
+                  <ul>
+                      <li><a href="#">Home</a></li>
+                      <li><a href="/flashcards">Flashcards</a></li>
+                      <li><a href="/about">About Us</a></li>
+                      <li><a href="/member">Members</a></li>
+                  </ul>
+              </div>
+              <div class="footer-item">
+                  <h3>Latest Updates</h3>
+                  <ul>
+                      <li><i class="fa-solid fa-circle-plus"></i> Math flashcards added.</li>
+                      <li><i class="fa-solid fa-circle-plus"></i> New interactive quizzes available.</li>
+                      <li><i class="fa-solid fa-circle-plus"></i> Improved search functionality.</li>           
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="copyright">
+          <p>&copy; 2023 <span id="copyright">CEDT Flashcards</span>. All rights reserved.</p>
+      </div>
+  </footer>
+
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/menu-bar.js"></script>
+    <script type="module" src="scripts/newcard.js"></script>
+    <script type="module" src="scripts/login-form.js"></script>
+    
+
+    <!-- icon -->
+    <script type="module"src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
