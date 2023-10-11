@@ -7,7 +7,7 @@
     <title>CEDT Flash card</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="playstyle.css" >
-    <link rel="stylesheet" href="style.css" >
+    <!-- <link rel="stylesheet" href="style.css" > -->
     <link rel="stylesheet" href="thestyle.css" >
   </head>
 
@@ -203,6 +203,16 @@
                 <button class="delete-card" id="delete-card-yes">Yes</button>
                 <button class="close-delete" id="delete-card-no">No</button>
             </div>
+
+            <div class="play-popup">
+                <div class="close-popup">&times;</div>
+                <div class="play-popup-text">
+                    <h3 id="nameti">title</h3>
+                    <p id="namede">description</p>
+                </div>
+                <button class="play-submit" id="playsub" type="submit">Play</button>
+            </div>
+
             <div class="flashcard-container">
                 <!-- Flashcard Content -->
                
@@ -277,8 +287,8 @@
         <div class="popup_sum">
 			<h2>flash card topic</h2>
 
-			<div class="box1">
-				<h3 class="text">เก่งละง้าบบ</h3>
+			<div class="Box1">
+				<h3 class="text" id="Text">เก่งละง้าบบ</h3>
 				<div class="circular-progress">
 					<span class="progress-value">
 						
@@ -287,8 +297,8 @@
 			</div>
             <div class="Box2">
                 <div class="score">
-                    <p>Correct 4:</p>
-                    <p>Skip 6:</p>
+                    <p id="correct"></p>
+                    <p id="skip">Skip :</p>
                 </div>
 
                 <div class="Button">
@@ -301,7 +311,7 @@
         <div class="card">
             <div class="card__inner">
               <div class="card__face card__face--front">
-                <h2>Boss</h2>
+                <h2>BossBt</h2>
               </div>
               <div class="card__face card__face--back">
                 <div class="card__content">
@@ -322,12 +332,12 @@
 
     </section>
 
-    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/play.js"></script>
+    <!-- <script type="module" src="scripts/main.js"></script> -->
     <script type="module" src="scripts/menu-bar.js"></script>
     <script type="module" src="scripts/newcard.js"></script>
     <script type="module" src="scripts/login-form.js"></script>
     <script type="module" src="scripts/config.js"></script>
-    <script type="module" src="scripts/play.js"></script>
     <!-- icon -->
     <script type="module"src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
