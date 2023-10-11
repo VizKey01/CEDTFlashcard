@@ -120,6 +120,32 @@ app.delete('/flashcards/:id', async (req, res) => {
 });
 
 
+app.put('/flashcards/:id', async (req, res) => {
+  const flashcardId = req.params.id;
+  const newTodos = req.body.todos; // รับข้อมูล todos ใหม่จากฟอร์มแก้ไข Flashcard
+
+  try {
+    // ดึงข้อมูล Flashcard ที่ต้องการแก้ไขจาก MongoDB
+    const flashcard = await Flashcard.findById(flashcardId);
+
+    if (!flashcard) {
+      res.status(404).json({ success: false, message: 'Flashcard not found' });
+      return;
+    }
+
+    // อัปเดตค่า todos ใน Flashcard
+    flashcard.todos = newTodos;
+
+    // บันทึก Flashcard ที่มีการแก้ไขลงใน MongoDB
+    await flashcard.save();
+
+    res.json({ success: true, message: 'Flashcard updated successfully' });
+  } catch (error) {
+    console.error('Error updating flashcard:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 
 
 
@@ -132,5 +158,4 @@ app.delete('/flashcards/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
 });
-
 
