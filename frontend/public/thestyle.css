@@ -440,7 +440,8 @@ body {
 }
 
 .edit-button,
-.delete-button {
+.delete-button
+{
   background-color: #ff5722;
   color: #fff;
   border: none;
@@ -450,6 +451,36 @@ body {
   margin-top: 10px;
   cursor: pointer;
   margin-right: 6px;
+}
+
+.play-button{
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 6px;
+  background-color: #32e30a;
+}
+.play-button:hover, .play-submit:hover{
+  background-color: #2dc10b;
+}
+
+.play-popup-text {
+  min-height: 200px;
+}
+.play-submit{
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background-color: #32e30a;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;  
 }
 
 .edit-button:hover,
@@ -524,13 +555,15 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.create-new-flashcard-card h3 {
+h3 {
   font-size: 1.2rem;
+  overflow-wrap: break-word;
 }
 
 .create-new-flashcard-card p {
   font-size: 1rem;
   margin: 10px 0;
+  /* overflow-wrap: break-word; */
 }
 
 .create-flashcard-button {
@@ -695,7 +728,7 @@ body {
   color: rgb(0, 0, 0);
   font-size: 1rem;
 }
-.creatnew-popup .remove-todo , .edit-popup .remove-todo {
+.remove-todo {
   position: absolute;
   font-size: 16px;
   right: -10px;
