@@ -1,3 +1,4 @@
+
 async function displayFlashcards() {
   try {
     // ดึงข้อมูล Flashcard จาก API Endpoint ที่สร้างใน index.js
@@ -14,10 +15,11 @@ async function displayFlashcards() {
         flashcards.forEach((flashcard, index) => {
           const flashcardContent = document.createElement('div');
           flashcardContent.classList.add('flashcard-content');
+          
         
           // เพิ่ม data attribute สำหรับ flashcardId
           flashcardContent.setAttribute('data-flashcard-id', flashcard._id);
-
+          
           const h3 = document.createElement('h3');
           h3.textContent = flashcard.title;
 
@@ -28,12 +30,13 @@ async function displayFlashcards() {
           descriptiontext.classList.add('adjusts');
           descriptiontext.appendChild(p);
           
-          let isEditing = false;
+          
+          let isEditing=false;
           const editButton = document.createElement('button');
           editButton.classList.add('edit-button');
           editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
           editButton.onclick = function () {
-            if (!isEditing || isEditing) {
+            
               const flashcardId = flashcardContent.getAttribute('data-flashcard-id');
               isEditing = true;
               const editPopup = document.querySelector('.edit-popup');
@@ -50,8 +53,62 @@ async function displayFlashcards() {
                 // สร้างรายการ todo ใน todo list ด้วยฟังก์ชัน addTodoForEdit()
                 addTodoForEdit(todo.term, todo.definition);
               });
+              document.querySelector('#editcard').addEventListener('click', async function () {
+                // ดึงข้อมูลจากฟอร์มการ์ดแก้ไข
+                const newTitle = document.querySelector('.edittodo-title').value;
+                const newDescription = document.querySelector('.edittodo-description').value;
+                const flashcardId = flashcard._id;
+                // ดึงรายการ todos ที่ผู้ใช้แก้ไขเข้ามา
+                const todoItems = document.querySelectorAll('.todo');
+                const newTodos = [];
               
-            }
+                todoItems.forEach((todoItem) => {
+                  const termElement = todoItem.querySelector('#getnameterm');
+                  const definitionElement = todoItem.querySelector('#getnamedefi');
+              
+                  if (termElement && definitionElement) {
+                    const term = termElement.innerHTML;
+                    const definition = definitionElement.innerHTML;
+                    newTodos.push({ term, definition });
+                  }
+                });
+                document.querySelector('.edit-popup').classList.remove('active')
+                try {
+                  // ดึงค่า ID ของ Flashcard ที่ต้องการแก้ไข
+                  const flashcardId = flashcard._id; // ต้องมีการเก็บค่า flashcard ที่ต้องการแก้ไข
+                  
+                  // ส่งคำขอ PUT ไปยัง API Endpoint ที่เชื่อมต่อกับ MongoDB
+                  const updateResponse = await fetch(`/flashcards/${flashcardId}`, {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ todos: newTodos }),
+                  });
+              
+                  if (updateResponse.ok) {
+                    // ถ้าอัปเดตสำเร็จ
+                    // ทำตามการแสดงผลหรือการจัดการข้อมูลเพิ่มเติมตามที่คุณต้องการ
+                    console.log('อัปเดต Flashcard สำเร็จ');
+              
+                    // หลังจากอัปเดตข้อมูลใน Flashcard แล้วคุณสามารถล้างค่า input fields เหมือนเดิม
+                    document.querySelector('.edittodo-title').value = '';
+                    document.querySelector('.edittodo-description').value = '';
+                    document.querySelector('.todo-list').innerHTML = '';
+              
+                    // หลังจากอัปเดต Flashcard แล้วคุณสามารถแสดงข้อมูล Flashcard ใหม่
+                    clearFlashcardContainer();
+                    displayFlashcards();
+                  } else {
+                    console.error('Error updating flashcard:', updateResponse.statusText);
+                    // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
+                  }
+                } catch (error) {
+                  console.error('Error updating item:', error);
+                  // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
+                }
+              });
+            
           };
           
           // เพิ่มฟังก์ชันล้างรายการ todo ทั้งหมด
@@ -72,11 +129,11 @@ async function displayFlashcards() {
           }
           
           
+          // const playButton = document.createElement('button');
+          // playButton.classList.add('play-button');
+          // deleteButton.innerHTML = 'Play';
           
           
-
-
-
 
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete-button');
@@ -117,14 +174,24 @@ async function displayFlashcards() {
               }
             });
           };
+          function playcard(){
+            document.querySelector('.play-popup').classList.add('active');
+        }
           
-          
-          
+          const playButton = document.createElement('div');
+          playButton.classList.add('play-button');
+          playButton.innerHTML = '<p style=text-align:center;>Play</p>';
+          playButton.onclick = function(){
+            
+            playcard()
+          }
 
           flashcardContent.appendChild(h3);
           flashcardContent.appendChild(descriptiontext);
           flashcardContent.appendChild(editButton);
           flashcardContent.appendChild(deleteButton);
+          flashcardContent.appendChild(playButton);
+         
 
           flashcardContainer.appendChild(flashcardContent);
         });
@@ -177,61 +244,7 @@ document.querySelector('.edit-popup .back').addEventListener('click', function (
   document.querySelector('.overlay').style.display = 'none';
 })
 //กด submit
-document.querySelector('#editcard').addEventListener('click', async function () {
-  // ดึงข้อมูลจากฟอร์มการ์ดแก้ไข
-  const newTitle = document.querySelector('.edittodo-title').value;
-  const newDescription = document.querySelector('.edittodo-description').value;
-  
-  // ดึงรายการ todos ที่ผู้ใช้แก้ไขเข้ามา
-  const todoItems = document.querySelectorAll('.todo');
-  const newTodos = [];
 
-  todoItems.forEach((todoItem) => {
-    const termElement = todoItem.querySelector('#getnameterm');
-    const definitionElement = todoItem.querySelector('#getnamedefi');
-
-    if (termElement && definitionElement) {
-      const term = termElement.innerHTML;
-      const definition = definitionElement.innerHTML;
-      newTodos.push({ term, definition });
-    }
-  });
-  document.querySelector('.edit-popup').classList.remove('active')
-  try {
-    // ดึงค่า ID ของ Flashcard ที่ต้องการแก้ไข
-    const flashcardId = flashcard._id; // ต้องมีการเก็บค่า flashcard ที่ต้องการแก้ไข
-    
-    // ส่งคำขอ PUT ไปยัง API Endpoint ที่เชื่อมต่อกับ MongoDB
-    const updateResponse = await fetch(`/flashcards/${flashcardId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ todos: newTodos }),
-    });
-
-    if (updateResponse.ok) {
-      // ถ้าอัปเดตสำเร็จ
-      // ทำตามการแสดงผลหรือการจัดการข้อมูลเพิ่มเติมตามที่คุณต้องการ
-      console.log('อัปเดต Flashcard สำเร็จ');
-
-      // หลังจากอัปเดตข้อมูลใน Flashcard แล้วคุณสามารถล้างค่า input fields เหมือนเดิม
-      document.querySelector('.edittodo-title').value = '';
-      document.querySelector('.edittodo-description').value = '';
-      document.querySelector('.todo-list').innerHTML = '';
-
-      // หลังจากอัปเดต Flashcard แล้วคุณสามารถแสดงข้อมูล Flashcard ใหม่
-      clearFlashcardContainer();
-      displayFlashcards();
-    } else {
-      console.error('Error updating flashcard:', updateResponse.statusText);
-      // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
-    }
-  } catch (error) {
-    console.error('Error updating item:', error);
-    // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
-  }
-});
 
 
 
