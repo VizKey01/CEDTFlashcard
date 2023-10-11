@@ -2,10 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!--this meta for changeing responsive screen -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>CEDT Flash card</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--<link rel="stylesheet" href="style.css" /> -->
-     <link rel="stylesheet" href="thestyle.css" >
+    <link rel="stylesheet" href="playstyle.css" >
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="thestyle.css" >
   </head>
 
 
@@ -123,6 +126,52 @@
                 <div class="todo-list"></div>
             </div>
         </div>
+
+        <div class="edit-popup">
+            <h5 class="Head">Edit Flashcard</h5>
+            
+            <div class="newbox">
+                <p>
+                    <label for="name">Title</label>
+                    <input class="edittodo-title" title="text" />
+                </p>
+                <p>
+                    <label for="name">Description</label>
+                    <input class="edittodo-description" type="text" />
+                </p>
+            </div>
+
+            <div class="newbox">
+                <p>
+                    <label for="term">Term</label>
+                    <input class="edittodo-term" type="text" />
+                </p>
+                <p>
+                    <label for="definition">Definition</label>
+                    <input class="edittodo-definition" type="text" />
+                </p>
+
+                <p>
+                    <span class="edit-todo" type="button">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                    </span>
+                </p>
+            </div>
+
+            <p>
+                <span class="back" type="button">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </span>
+            </p>
+
+            <div class="Submit">
+                <button id="editcard" type="submit">submit</button>
+            </div>
+
+            <div class="Todo-List">
+                <div class="edittodo-list"></div>
+            </div>
+        </div>
     </div>
 
     <div>
@@ -136,7 +185,6 @@
                 <p><strong>User Name:</strong> <span class="highlight">Unknown</span></p>
             <p><strong>Flashcards Created:</strong> <span class="highlight">-</span> Cards</p>
             <p><strong>Flashcards Played:</strong> <span class="highlight">-</span> Cards</p>
-            <p><strong>Play Time:</strong> <span class="highlight">-</span> hours</p>
         </div>
     </div>
     
@@ -158,75 +206,12 @@
             <div class="flashcard-container">
                 <!-- Flashcard Content -->
                
-                
-                <!-- <div class="flashcard-content">
-                    <h3>Flashcard Title 1</h3>
-                    <div class="adjusts">
-                        <p>The description of Flashcard 1. Click to view more.</p>
-                    </div>
-                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
-                </div>
-                
-                <div class="flashcard-content">
-                    <h3>Flashcard Title 2</h3>
-                    <div class="adjusts">
-                        <p>The description of Flashcard 1. Click to view more.</p>
-                    </div>
-                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
-                </div>
-                
-
-                <div class="flashcard-content">
-                    <h3>Flashcard Title 3</h3>
-                    <div class="adjusts">
-                        <p>The description of Flashcard 1. Click to view more.</p>
-                    </div>
-                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
-                </div> -->
                 <!-- End of Flashcard Content -->
             </div>
         </div>
     </div>
 </div>
 </div>
-
-
-
-<!-- Suggesting Cards Section -->
-<div class="suggestion-cards-container">
-        <div class="suggestion-cards">
-            <h2><i class="fas fa-search"></i> Suggestion Cards</h2>
-            <div class="search-bar">
-                <input type="text" placeholder="Search flashcards...">
-                <button class="search-button">Search</button>
-            </div>
-            <div class="suggestion-card-container">
-                <!-- Suggestion Cards Here -->
-                <div class="suggestion-card">
-                    <!-- Card Content 1 -->
-                </div>
-                <div class="suggestion-card">
-                    <!-- Card Content 2 -->
-                </div>
-                <div class="suggestion-card">
-                    <!-- Card Content 3 -->
-                </div>
-                <div class="suggestion-card">
-                    <!-- Card Content 4 -->
-                </div>
-                <div class="suggestion-card">
-                    <!-- Card Content 5 -->
-                </div>
-            </div>
-        </div>
-        <div class="show-more">
-            <i class="fas fa-chevron-down"></i> Show More
-        </div>
-    </div>
-
     
     <!-- Subscription Plans Section -->
     <div class="subscription-plans-section">
@@ -260,8 +245,8 @@
                   <h3>Contact Us</h3>
                   <p style="padding-top: 10px;">If you have any questions or feedback, please feel free to reach out:</p>
                   <ul>
-                      <li>Email: <a href="mailto:contact@yourwebsite.com">6633166821@gmail.com</a></li>
-                      <li>Github: <a href="https://github.com/yourgithub" target="_blank">GitHub</a></li>
+                      <li>Email: <a href="mailto:micmin0101@gmail.com">Gmail</a></li>
+                      <li>Github: <a href="https://github.com/VizKey01/CEDTFlashcard" target="_blank">GitHub</a></li>
                   </ul>
               </div>
               <div class="footer-item">
@@ -288,12 +273,61 @@
       </div>
   </footer>
 
+    <section class="PLAYCARD">
+        <div class="popup_sum">
+			<h2>flash card topic</h2>
+
+			<div class="box1">
+				<h3 class="text">เก่งละง้าบบ</h3>
+				<div class="circular-progress">
+					<span class="progress-value">
+						
+					</span>
+				</div>
+			</div>
+            <div class="Box2">
+                <div class="score">
+                    <p>Correct 4:</p>
+                    <p>Skip 6:</p>
+                </div>
+
+                <div class="Button">
+                    <button type="submit" id="Retry">retry</button>
+                    <button type="submit" id="Home">home</button>
+                </div>
+		    </div>
+        </div>
+        
+        <div class="card">
+            <div class="card__inner">
+              <div class="card__face card__face--front">
+                <h2>Boss</h2>
+              </div>
+              <div class="card__face card__face--back">
+                <div class="card__content">
+                  <button class="return-button">X</button>
+                  <div class="card__header">
+                    <h4><span class="index-count">1</span>/<span class="total-count">15</span></h4>
+                  </div>
+                  <div class="card__body">
+                    <h3>Kwin Jetasanond</h3>
+                  </div>
+                  <div class="card__controls">
+                    <button class="skip-button">Skip <span class="skip-count">0</span></button>
+                    <button class="correct-button">Correct <span class="correct-count">0</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    </section>
+
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/menu-bar.js"></script>
     <script type="module" src="scripts/newcard.js"></script>
     <script type="module" src="scripts/login-form.js"></script>
-    
-
+    <script type="module" src="scripts/config.js"></script>
+    <script type="module" src="scripts/play.js"></script>
     <!-- icon -->
     <script type="module"src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
