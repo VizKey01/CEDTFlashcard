@@ -1,8 +1,3 @@
-// Add this code to your frontend JavaScript file (index.html)
-
-
-
-
 async function displayFlashcards() {
   try {
     // ดึงข้อมูล Flashcard จาก API Endpoint ที่สร้างใน index.js
@@ -19,6 +14,9 @@ async function displayFlashcards() {
         flashcards.forEach((flashcard, index) => {
           const flashcardContent = document.createElement('div');
           flashcardContent.classList.add('flashcard-content');
+        
+          // เพิ่ม data attribute สำหรับ flashcardId
+          flashcardContent.setAttribute('data-flashcard-id', flashcard._id);
 
           const h3 = document.createElement('h3');
           h3.textContent = flashcard.title;
@@ -29,10 +27,56 @@ async function displayFlashcards() {
           const descriptiontext = document.createElement('div');
           descriptiontext.classList.add('adjusts');
           descriptiontext.appendChild(p);
-
+          
+          let isEditing = false;
           const editButton = document.createElement('button');
           editButton.classList.add('edit-button');
           editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
+          editButton.onclick = function () {
+            if (!isEditing || isEditing) {
+              const flashcardId = flashcardContent.getAttribute('data-flashcard-id');
+              isEditing = true;
+              const editPopup = document.querySelector('.edit-popup');
+              editPopup.classList.add('active');
+              
+              // ดึงข้อมูล flashcard และใส่ลงในฟอร์มสำหรับการแก้ไข
+              document.querySelector('.edittodo-title').value = flashcard.title;
+              document.querySelector('.edittodo-description').value = flashcard.description;
+              
+              // แสดงรายการ todo ลงใน todo list ด้วยการอ่าน flashcard.todos และใส่ในรายการใหม่
+              const todoList = document.querySelector('.edittodo-list');
+              clearTodoList(); // เพิ่มฟังก์ชันล้างรายการ todo ทั้งหมด
+              flashcard.todos.forEach((todo) => {
+                // สร้างรายการ todo ใน todo list ด้วยฟังก์ชัน addTodoForEdit()
+                addTodoForEdit(todo.term, todo.definition);
+              });
+              
+            }
+          };
+          
+          // เพิ่มฟังก์ชันล้างรายการ todo ทั้งหมด
+          function clearTodoList() {
+            const todoList = document.querySelector('.edittodo-list');
+            while (todoList.firstChild) {
+              todoList.firstChild.remove();
+            }
+          }
+          
+          // เพิ่มรายการ todo ใน edit popup
+          function addTodoForEdit(term, definition) {
+            // สร้างรายการ todo ใน todo list ด้วยฟังก์ชัน addTodo()
+            document.querySelector('.edittodo-term').value = term;
+            document.querySelector('.edittodo-definition').value = definition;
+            editTodo();
+            
+          }
+          
+          
+          
+          
+
+
+
 
           const deleteButton = document.createElement('button');
           deleteButton.classList.add('delete-button');
@@ -99,8 +143,8 @@ async function displayFlashcards() {
 // เรียกใช้งานฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
 window.addEventListener('DOMContentLoaded', () => {
   displayFlashcards();
+  
 });
-
 
 
 document.querySelector('.create-flashcard-button').addEventListener('click', function () {
@@ -116,6 +160,7 @@ document.querySelector('.new-flashcard-button').addEventListener('click', functi
 document.querySelector('.createnew-popup .back').addEventListener('click', function () {
   document.querySelector('.createnew-popup').classList.remove('active')
   document.querySelector('.overlay').style.display = 'none';
+  
 })
 //กด submit
 document.querySelector('#createnewcard').addEventListener('click', function () {
@@ -123,14 +168,141 @@ document.querySelector('#createnewcard').addEventListener('click', function () {
 })
 
 
+
+
+
+//กด กลับ
+document.querySelector('.edit-popup .back').addEventListener('click', function () {
+  document.querySelector('.edit-popup').classList.remove('active')
+  document.querySelector('.overlay').style.display = 'none';
+})
+//กด submit
+document.querySelector('#editcard').addEventListener('click', async function () {
+  // ดึงข้อมูลจากฟอร์มการ์ดแก้ไข
+  const newTitle = document.querySelector('.edittodo-title').value;
+  const newDescription = document.querySelector('.edittodo-description').value;
+  
+  // ดึงรายการ todos ที่ผู้ใช้แก้ไขเข้ามา
+  const todoItems = document.querySelectorAll('.todo');
+  const newTodos = [];
+
+  todoItems.forEach((todoItem) => {
+    const termElement = todoItem.querySelector('#getnameterm');
+    const definitionElement = todoItem.querySelector('#getnamedefi');
+
+    if (termElement && definitionElement) {
+      const term = termElement.innerHTML;
+      const definition = definitionElement.innerHTML;
+      newTodos.push({ term, definition });
+    }
+  });
+  document.querySelector('.edit-popup').classList.remove('active')
+  try {
+    // ดึงค่า ID ของ Flashcard ที่ต้องการแก้ไข
+    const flashcardId = flashcard._id; // ต้องมีการเก็บค่า flashcard ที่ต้องการแก้ไข
+    
+    // ส่งคำขอ PUT ไปยัง API Endpoint ที่เชื่อมต่อกับ MongoDB
+    const updateResponse = await fetch(`/flashcards/${flashcardId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ todos: newTodos }),
+    });
+
+    if (updateResponse.ok) {
+      // ถ้าอัปเดตสำเร็จ
+      // ทำตามการแสดงผลหรือการจัดการข้อมูลเพิ่มเติมตามที่คุณต้องการ
+      console.log('อัปเดต Flashcard สำเร็จ');
+
+      // หลังจากอัปเดตข้อมูลใน Flashcard แล้วคุณสามารถล้างค่า input fields เหมือนเดิม
+      document.querySelector('.edittodo-title').value = '';
+      document.querySelector('.edittodo-description').value = '';
+      document.querySelector('.todo-list').innerHTML = '';
+
+      // หลังจากอัปเดต Flashcard แล้วคุณสามารถแสดงข้อมูล Flashcard ใหม่
+      clearFlashcardContainer();
+      displayFlashcards();
+    } else {
+      console.error('Error updating flashcard:', updateResponse.statusText);
+      // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
+    }
+  } catch (error) {
+    console.error('Error updating item:', error);
+    // จัดการข้อผิดพลาดที่เกิดขึ้นถ้าจำเป็น
+  }
+});
+
+
+
+
 const todoTerm = document.querySelector('.todo-term')
 const todoDefinition = document.querySelector('.todo-definition')
 const addTodoButton = document.querySelector('.add-todo')
+const editTodoButton = document.querySelector('.edit-todo')
 const todoList = document.querySelector('.todo-list')
 
 function removeTodo(event) {
   event.target.parentNode.remove()
 }
+
+
+function editTodo() {
+  // ตรวจสอบว่าคุณกำลังแก้ไข flashcard หรือไม่
+  
+    // ดึงข้อมูลรายการ todo จาก input fields และตรวจสอบความว่างเปล่า
+    const termValue = document.querySelector('.edittodo-term').value;
+    const definitionValue = document.querySelector('.edittodo-definition').value;
+
+    if (termValue === '' || definitionValue === '') {
+      alert('กรุณาใส่ Term และ Definition');
+      return;
+    }
+
+    // สร้างรายการ todo จากข้อมูลใหม่
+    const todo = document.createElement('div');
+    todo.classList.add('todo');
+
+    const todo_text = document.createElement('div');
+    todo_text.classList.add('todo_text');
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.classList.add('remove-todo');
+    button.innerHTML = '-';
+    button.addEventListener('click', removeTodo);
+
+    const termLabel = document.createElement('label');
+    termLabel.innerHTML = 'Term';
+
+    const term = document.createElement('p');
+    term.id = 'getnameterm'; // เพิ่ม id สำหรับ term element
+    term.innerHTML = termValue;
+
+    const definitionLabel = document.createElement('label');
+    definitionLabel.innerHTML = 'Definition';
+
+    const definition = document.createElement('p');
+    definition.id = 'getnamedefi'; // เพิ่ม id สำหรับ definition element
+    definition.innerHTML = definitionValue;
+
+    // label, p, button => todo_text
+    todo_text.append(termLabel, term, definitionLabel, definition);
+
+    todo.append(button, todo_text);
+
+    // todo => todo list
+    const todoList = document.querySelector('.edittodo-list'); // ใช้เลือก .edittodo-list
+    todoList.appendChild(todo);
+
+    // ล้าง input fields หลังจากการเพิ่มรายการ todo
+    document.querySelector('.edittodo-term').value = '';
+    document.querySelector('.edittodo-definition').value = '';
+  
+}
+
+
+
 
 function addTodo() {
   if (todoTerm.value === '' || todoDefinition.value === '') {
@@ -180,6 +352,7 @@ function addTodo() {
 }
 
 addTodoButton.addEventListener('click', addTodo)
+editTodoButton.addEventListener('click', editTodo)
 
 
 
@@ -332,12 +505,3 @@ document.querySelectorAll('.delete-button').forEach((deleteButton, index) => {
     });
   });
 });
-
-
-
-
-
-
-//---------------summit flashcard---------------
-
-
