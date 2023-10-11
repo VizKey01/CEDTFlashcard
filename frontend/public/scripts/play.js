@@ -1,35 +1,4 @@
 
-/*export async function getFlashcardsplayFromMongoDB() {
-  try {
-    const response = await fetch('/flashcards'); // เปลี่ยนเส้นทาง URL ตาม API Endpoint ของคุณ
-    if (response.ok) {
-      const result = await response.json();
-      if (result.success) {
-        return result.flashcards; // ส่งรายการ flashcards ที่ได้มากลับ
-      } else {
-        console.error(result.message);
-      }
-    } else {
-      console.error('เกิดข้อผิดพลาดในการดึงข้อมูล');
-    }
-  } catch (error) {
-    console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
-  }
-}
-
-export async function updateFlashcardsFromMongoDB() {
-  const flashcards = await getFlashcardsFromMongoDB();
-  if (flashcards && flashcards.length > 0) {
-    // อัปเดตรายการ flashcards ในไฟล์ play.js
-    // เปลี่ยนตำแหน่งเริ่มต้นของ currentFlashcardIndex และอัปเดต flashcards ด้วยข้อมูลใหม่
-    currentFlashcardIndex = 0;
-    flashcards.forEach((flashcard, index) => {
-      flashcards[index] = { term: flashcard.title, definition: flashcard.description };
-    });
-    return flashcards;
-  }
-  return null;
-}*/
 
 
 
@@ -39,15 +8,15 @@ export async function updateFlashcardsFromMongoDB() {
 const Playbutt = document.querySelectorAll('.play-button');
 
 // ลูปผ่านทุกองค์ประกอบแล้วให้เพิ่มเหตุการณ์คลิกที่ทุกองค์ประกอบ
-Playbutt.forEach((playpop) => {
-  console.log(playpop);
-  playpop.addEventListener('click', playcard);
-});
+// Playbutt.forEach((playpop) => {
+//   console.log(playpop);
+//   playpop.addEventListener('click', playcard);
+// });
 
-// flashcard
-function playcard() {
-  document.querySelector('.play-popup').classList.add('active');
-}
+// // flashcard
+// function playcard() {
+//   document.querySelector('.play-popup').classList.add('active');
+// }
 
 //กด กลับ
 document.querySelector('.close-popup').addEventListener('click', function () {
@@ -61,7 +30,15 @@ document.querySelector('.close-popup').addEventListener('click', function () {
 //หลังกด play ให้แสดงการ์ดขึ้นมา
 const playing = document.querySelector(".play-submit");
 
+document.querySelector('.header').style.display = 'none';
+document.querySelector('.content').style.display = 'none';
+document.querySelector('.footer').style.display = 'none';
+document.querySelector('.PLAYCARD').style.display = 'block';
 
+//กด กลับ
+document.querySelector('.close-popup').addEventListener('click', function () {
+    document.querySelector('.play-popup').classList.remove('active');
+})
 
 
 const card = document.querySelector(".card__inner");
@@ -80,34 +57,9 @@ const flashcardsplay = [
 ];
 
 
-export async function addFlashcardToPlay(flashcardId) {
-  try {
-    // ดึงข้อมูลจาก MongoDB โดยใช้ flashcardId
-    console.log(flashcardId);
-    console.log('URL ที่ใช้ในคำขอ fetch:', `/flashcards/${flashcardId}`);
-    const response = await fetch(`/flashcards/${flashcardId}`);
-    console.log('ผ่าน');
-    if (response.ok) {
-      const result = await response.json();
-      console.log('ข้อมูลที่ได้จาก API:', result); // ย้ายการใช้งาน result ไปตรงนี้
-      if (result.success) {
-        if (result.todos && Array.isArray(result.todos)) {
-          result.todos.forEach((todo) => {
-            const term = todo.term;
-            const definition = todo.definition;
-            flashcardsplay.push({ term, definition });
-            console.log('เพิ่ม Flashcard ลงใน flashcardsplay:', { term, definition });
-          });
-        }
-      } else {
-        console.error(result.message);
-      }
-    } else {
-      console.error('เกิดข้อผิดพลาดในการดึงข้อมูล');
-    }
-  } catch (error) {
-    console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
-  }
+export async function addFlashcardsToPlay(flashcardsplay) {
+  // ทำการเพิ่ม flashcardsplay ที่รับเข้ามาใน flashcard.js
+  flashcard.flashcards = flashcardsplay;
 }
 
 
@@ -174,19 +126,19 @@ function goToNextFlashcard(isSkipped) {
       document.getElementById('correct').innerHTML = 'Correct : '+correctCount
       document.getElementById('skip').innerHTML = 'Skip : '+newskip
       if(progressEndValue <= 20){
-      document.getElementById('Text').innerHTML = 'ครั้งหน้าเอาใหม่'
+      document.getElementById('Text').innerHTML = 'ผิดหวังอ่ะ'
         }
       else if(progressEndValue <= 40){
-        document.getElementById('Text').innerHTML = 'เกือบละอีกนิดเดียว'
+        document.getElementById('Text').innerHTML = 'ได้แค่นี้อ่อ'
       }
       else if(progressEndValue <= 60){
-        document.getElementById('Text').innerHTML = 'เก่งละ'
+        document.getElementById('Text').innerHTML = 'ดีอยู่ ='
       }
       else if(progressEndValue <= 80){
-        document.getElementById('Text').innerHTML = 'เก่งมากๆ'
+        document.getElementById('Text').innerHTML = 'ว้าวววววววว สุดยอดไปเลย ว้าวๆๆๆ'
       }
       else if(progressEndValue <= 100){
-        document.getElementById('Text').innerHTML = 'ไอ้เหี้ยเก่งชิบหา'
+        document.getElementById('Text').innerHTML = 'เก่งอยู่นะ แต่เก่งแค่ไหนก็ไปอยู่ในใจเค้าไม่ได้หรอก'
       }
       
 
@@ -244,6 +196,10 @@ correctButton.addEventListener("click", function (e) {
   document.querySelector(".correct-count").textContent = correctCount;
 
 });
+
+
+
+
 
 
 
