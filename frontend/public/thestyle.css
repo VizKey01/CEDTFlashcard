@@ -384,7 +384,6 @@ body {
 
 .flashcard-body {
   padding: 20px;
-  padding: 20px;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 390px;
@@ -413,8 +412,8 @@ body {
 }
 
 .flashcard-content {
-  background-color: #f4a942;
-  border: 2.5px solid #e64a19;
+  background-color: #f5f5f5;
+  border: 2px solid #ddd;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -425,43 +424,44 @@ body {
 }
 
 .flashcard-content:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  /* background-color: #aaa; */
+  border: 2px solid #ff5722;
 }
 
 .flashcard-content h3 {
   font-size: 1.2rem;
-  color: white;
 }
 
 .flashcard-content .adjusts {
   min-height: 70px;
   overflow-wrap: break-word;
-  color: wheat;
+  color: #333;
 }
 
 .edit-button,
 .delete-button {
-  background-color: #e64a19;
+  background-color: #ff5722;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
   font-size: 0.9rem;
   margin-top: 10px;
-  margin-right: 5px;
   cursor: pointer;
+  margin-right: 6px;
 }
 
 .edit-button:hover,
 .delete-button:hover {
-  background-color: #555;
+  background-color: #e64a19;
 }
 
 /* delete card button */
 
 .delete-popup {
   position: fixed;
-  display: none;
+  /* display: none; */
   top: -200%; 
   left: 50%;
   opacity: 0;
@@ -475,7 +475,8 @@ body {
 }
 
 .delete-popup.active {
-  display: block;
+  /* display: block; */
+  z-index: 10;
   top: 50%; 
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
@@ -549,7 +550,7 @@ body {
 
 /* new card pop up*/
 
-.createnew-popup {
+.createnew-popup ,.edit-popup{
   color: #222;
   position: fixed;
   top: -150%;
@@ -569,20 +570,23 @@ body {
       transform 200ms ease-in-out 0ms;
 }
 
-.createnew-popup.active {
+.createnew-popup.active ,.edit-popup.active{
   top: 55%;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms,
       transform 200ms ease-in-out 0ms;
+  z-index: 10;
 }
 
-.createnew-popup .Head {
+
+.edit-popup .Head, .createnew-popup .Head {
   font-size: 30px;
   text-align: center;
+  padding-top: 12px;
 }
 
-.createnew-popup .newbox {
+.edit-popup .newbox ,.createnew-popup .newbox {
   position: relative;
   padding: 20px;
   margin-top: 40px;
@@ -590,54 +594,30 @@ body {
   margin-right: 20%;
 
   display: block;
-  border: 1px solid darkgray;
+  border: 2px solid #e64a19;
   box-sizing: border-box;
 }
 
-.createnew-popup .todo-title {
+.edit-popup .edittodo-title ,.createnew-popup .todo-title,
+.edit-popup .edittodo-description ,.createnew-popup .todo-description ,
+.createnew-popup .todo-term, .edit-popup .edittodo-term ,
+.edit-popup .edittodo-definition ,
+ .createnew-popup .todo-definition {
   font-size: 20px;
   display: block;
   border: 1px solid darkgray;
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
-}
-
-.createnew-popup .todo-description {
-  font-size: 20px;
-  display: block;
-  border: 1px solid darkgray;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
-}
-
-
-
-.createnew-popup .todo-term {
-  font-size: 20px;
-  display: block;
-  border: 1px solid darkgray;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
-}
-
-.createnew-popup .todo-definition {
-  font-size: 20px;
-  display: block;
-  border: 1px solid darkgray;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
+  border-radius: 3px;
 }
 
 @media screen and (max-width: 768px) {
-  .createnew-popup .todo-list {
+  .edit-popup .edittodo-list,.createnew-popup .todo-list {
       display: block;
       align-items: center;
   }
-  .createnew-popup .todo {
+  .edit-popup .edittodo,.createnew-popup .todo {
       font-size: 20px;
       background-color: lightgray;
       box-sizing: border-box;
@@ -650,15 +630,16 @@ body {
   }
 }
 
-.createnew-popup .add-todo {
+.edit-popup .edit-todo,.createnew-popup .add-todo {
   position: absolute;
-  top: -10%;
-  right: -3%;
-  font-size: 35px;
-  cursor: pointer;
+    top: -2%;
+    right: 0.5%;
+    font-size: 35px;
+    color: #e64a19;
+    cursor: pointer;
 }
 
-.createnew-popup .back {
+.edit-popup .back,.createnew-popup .back {
   position: absolute;
   top: 6%;
   left: 3%;
@@ -667,11 +648,11 @@ body {
   color: #222;
 }
 
-.createnew-popup .back:hover {
+.edit-popup .back:hover,.createnew-popup .back:hover {
   color: #e64a19;
 }
 
-.createnew-popup .Submit button {
+.edit-popup .Submit button,.createnew-popup .Submit button {
   position: absolute;
     top: 6%;
     right: 3%;
@@ -685,11 +666,11 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
-.createnew-popup .Submit button:hover {
+.edit-popup .Submit button:hover,.createnew-popup .Submit button:hover {
   background: #e64a19;
 }
 
-.createnew-popup .todo-list {
+.edittodo-list , .todo-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
@@ -697,7 +678,7 @@ body {
   margin: 20px 0;
 }
 
-.createnew-popup .todo {
+.edittodo , .todo {
   font-size: 20px;
   background-color: lightgray;
   box-sizing: border-box;
@@ -709,11 +690,12 @@ body {
   width: 90%;
 }
 
-.createnew-popup .todo p {
+.createnew-popup .todo p , .edit-popup .todo p {
   border-bottom: 2px solid black;
   color: rgb(0, 0, 0);
+  font-size: 1rem;
 }
-.createnew-popup .remove-todo {
+.creatnew-popup .remove-todo , .edit-popup .remove-todo {
   position: absolute;
   font-size: 16px;
   right: -10px;
@@ -729,6 +711,9 @@ body {
   height: 20px;
   /* left: 240px; */
 }
+
+
+
 .highlight {
   color: #ff5722;
 }
@@ -960,9 +945,9 @@ footer {
 
 /* Responsive Styles */
 @media screen and (max-width: 1130px) {
-  .flashcard {
-      max-width: 500px;
-  }
+.flashcard {
+    max-width: 500px;
+}
 
 }
 
@@ -995,7 +980,8 @@ footer {
   }
   
   .new-flashcard-button {
-      font-size: 1.2rem;
+    font-size: 1rem;
+    padding: 8px 20px;
     }
     
     /* Flashcard */
@@ -1003,40 +989,127 @@ footer {
       max-width: 480px;
       margin: 10px;
   }
-
+  
   .flashcard-container {
-      flex-direction: column;
-    }
-    
-    .flashcard-content {
-        width: 100%;
-    }
-    
-    .user-stats {
-        max-width: 100%;
-    }
+    flex-direction: column;
+  }
+  
+  .flashcard-content {
+    width: 100%;
+  }
+  
+  .user-stats {
+    max-width: 100%;
+  }
+  
+  /* popup */
+  .edit-popup .Head, .createnew-popup .Head {
+    font-size: 22px;
+  }
+  .edit-popup .Submit button, .createnew-popup .Submit button {
+    width: 60px;
+    height: 33px;
+    font-size: 12px;
+  }
+  .edit-popup .newbox ,.createnew-popup .newbox {
+    padding: 20px;
+    margin-top: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  label {
+    font-size: 1rem;
+  }
 
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   h1 {
-      font-size: 1.5rem;
+    font-size: 1.5rem;
   }
+  
+  .logo img {
+    max-width: 80%;
+  }
+  .welcome-section {
+    padding: 200px 0; 
+  }
+  
+  .welcome-content h1 {
+    font-size: 2.2rem; 
+    margin-bottom: 15px; 
+  }
+  
   .welcome-content p {
-      font-size: 1rem;
+    font-size: 1rem; 
+    margin-bottom: 40px; 
   }
   
-  p {
-      font-size: 0.5rem;
+  
+  .flashcard {
+    margin: 25px;
   }
   
+  /* popup */
+  .createnew-popup, .edit-popup {
+    padding: 20px 15px;
+    width: 90%;
+  }
+  .edit-popup .Head, .createnew-popup .Head {
+    font-size: 16px;
+  }
+  .edit-popup .Submit button, .createnew-popup .Submit button {
+    width: 45px;
+    height: 26px;
+    font-size: 10px;
+  }
+  .edit-popup .back, .createnew-popup .back {
+    left: 6%;
+    font-size: 25px;
+}
+  .edit-popup .newbox ,.createnew-popup .newbox {
+    padding: 15px;
+    margin-top: 20px;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  label {
+    font-size: 0.9rem;
+  }
+
+  .edit-popup .edittodo-list, .createnew-popup .todo-list {
+    gap: 0px;
+  }
+  .edit-popup .edittodo, .createnew-popup .todo {
+    padding: 10px;
+  }
+  .edit-popup .todo p, .createnew-popup .todo p {
+    border-bottom: 2px solid black;
+    color: rgb(0, 0, 0);
+    font-size: 0.8rem;
+  }
+
+
+  .subscription-plans-content h2 {
+    font-size: 1.5rem;
+  }
+  .subscription-plans-content p , p, .subscription-plans-content strong{
+    font-size: 1rem;
+  }
+  .subscription-button{
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+
+
   /* Footer */
   .about-us p {
-      font-size: 0.5rem;
+      font-size: 1rem;
   }
   
   .footer-grid {
