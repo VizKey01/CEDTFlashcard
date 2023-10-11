@@ -1,110 +1,159 @@
-@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200;400;600&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&display=swap');
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Prompt" , sans-serif;
+
+.popup_sum {
+	position: fixed;
+	top: -150%;
+	left: 50%;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(1.25);
+	width: 75%;
+	height: 75%;
+	padding: 20px 30px;
+	background: white;
+	box-shadow: 2px 2px 15px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	overflow: hidden;
+	overflow-y: scroll;
+	transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms,
+		transform 200ms ease-in-out 0ms;
 }
 
-div, section, span, ul, li, a, header{
-  box-sizing: border-box;
+.popup_sum.active {
+  z-index: 10;
+	top: 50%;
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1);
+	transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms,
+		transform 200ms ease-in-out 0ms;
 }
 
-body {
-  /*font-family: "Mitr", sans-serif;*/
+.popup_sum h2 {
+	text-align: center;
+	color: black;
+	margin: 20px 0px 20px;
+	font-size: 25px;
 }
 
-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 30px;
+.popup_sum .Box1 {
+	position: relative;
+	top: 80px;
+	left: 50px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 17%;
 }
 
-#app-name {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
+.popup_sum .text {
+	display: block;
+	font-size: 50px;
 }
 
-#sub-app-name {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
+.popup_sum .circular-progress {
+	display: block;
+	height: 250px;
+	width: 250px;
+	border-radius: 50%;
+	background: conic-gradient(#7d2 3.6deg, #ededed 0deg);
+	padding: 20px;
 }
 
-.main-content {
-  margin: 100px 0;
+.popup_sum .circular-progress ::before {
+	content: '';
+	position: absolute;
+	height: 210px;
+	width: 210px;
+	border-radius: 50%;
+	background-color: white;
 }
 
-section {
-  margin: 20px 0;
+.popup_sum .progress-value {
+	position: relative;
 }
 
-.section-title {
-  font-size: 1.2em;
-  font-weight: lighter;
-  margin: 0;
+.popup_sum .Box2 {
+	position: relative;
+	top: 80px;
+	left: 50px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 17%;
 }
 
-.section-subtitle {
-  font-size: 0.8em;
-  font-weight: lighter;
-  line-height: 80%;
+.popup_sum .score {
+	display: block;
+	font-size: 30px;
 }
 
-#member-list {
-  margin: 0;
-  font-size: 0.8em;
+.popup_sum .Button {
+	display: flex;
+	box-sizing: border-box;
+	flex-direction: column;
 }
 
-#main-table {
-  padding: 0;
-  width: 100%;
-  background: #eee;
-  border-radius: 8px;
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
-  border-collapse: collapse;
-  overflow: hidden;
+.popup_sum #retry {
+	display: block;
+	width: 250px;
+	height: 50px;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	background: black;
+	color: white;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-bottom: 20px;
 }
 
-#main-table > thead {
-  background: #555;
-  color: white;
+.popup_sum #Home {
+	display: block;
+	width: 250px;
+	height: 50px;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	background: black;
+	color: white;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
-#main-table > thead > tr > th {
-  font-weight: lighter;
-  text-align: left;
+@media screen and (max-width: 768px) {
+	.popup_sum {
+		align-content: center;
+	}
+	.popup_sum .Box1 {
+		position: relative;
+		top: 80px;
+		left: 50px;
+		display: block;
+	}
+	.popup_sum .text {
+		display: block;
+		font-size: 50px;
+		margin-bottom: 40px;
+	}
+	.popup_sum .Box2 {
+		position: relative;
+		top: 70px;
+		left: 50px;
+		display: block;
+	}
+	.popup_sum .score {
+		display: block;
+		font-size: 30px;
+		margin-bottom: 40px;
+	}
+	.popup_sum #Home {
+		display: block;
+		width: 250px;
+		height: 50px;
+		border: none;
+		outline: none;
+		font-size: 16px;
+		background: black;
+		color: white;
+		border-radius: 10px;
+		cursor: pointer;
+		margin-bottom: 40px;
+	}
 }
-
-#main-table td,
-#main-table th {
-  padding: 5px 10px;
-  font-weight: lighter;
-}
-
-#main-table input,
-#main-table select {
-  padding: 5px 10px;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-}
-
-#main-table button {
-  border-radius: 8px;
-  padding: 5px 10px;
-  border: 1px solid #aaa;
-  background: white;
-  width: 60px;
-  cursor: pointer;
-}
-
-#main-table button:hover {
-  background: rgb(255, 200, 105);
-  color: white;
-}
-
