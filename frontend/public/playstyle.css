@@ -14,6 +14,10 @@
 
 } */
 
+.PLAYCARD{
+    display: none;
+}
+
 .play-popup {
     position: fixed;
     /* display: none; */
@@ -150,7 +154,7 @@
 	border: none;
 	outline: none;
 	font-size: 16px;
-	background: black;
+	background: #ff5722;
 	color: white;
 	border-radius: 10px;
 	cursor: pointer;
@@ -232,7 +236,7 @@
   .popup_sum .circular-progress{
     width: 160px;
     height: 160px;
-    margin-left: 26%;
+    margin-left: 10%;
   }
   .popup_sum .circular-progress ::before {
     text-align: center;
@@ -460,6 +464,21 @@
 
 .return-button:hover {
   transform: scale(1.2);
+}
+
+.close-playingcard {
+    position: sticky;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgb(165, 165, 165);
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
