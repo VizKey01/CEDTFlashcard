@@ -1,6 +1,9 @@
-<h1>This is #CEDTFlashcard Website📇</h1>
+<h1>This is #CEDTFlashcard Website📇 </h1>
 <h3>💻 intro2cedt final project 💻</h3>
 <h4>Flashcard Website where you can create your own flashcards and explore other people's flashcards for learning for everyone.</h4><br>
+
+
+![Logo](https://i.ibb.co/YD3fKhy/Flashcardlogo01.png)
 
 
 ## Features
@@ -18,16 +21,20 @@
 
 <p>Ex:</p>
 <a href="https://ibb.co/NVQmY50"><img src="https://i.ibb.co/FxN072Q/Screenshot-2023-11-25-151014.png" alt="Screenshot-2023-11-25-151014" border="0"></a>
+<br>
 
 ## Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Example Color | ![#f8f8f8](https://via.placeholder.com/10/f8f8f8?text=+) #f8f8f8 |
-| Example Color | ![#00b48a](https://via.placeholder.com/10/00b48a?text=+) #00b48a |
-| Example Color | ![#00d1a0](https://via.placeholder.com/10/00b48a?text=+) #00d1a0 |
+| primary | ![#ffce00](https://via.placeholder.com/10/ffce00?text=+) #ffce00 |
+| secondary | ![#fe4880](https://via.placeholder.com/10/fe4880?text=+) #fe4880 |
+| third | ![#ff5722](https://via.placeholder.com/10/ff5722?text=+) #ff5722 |
+| fourth | ![#32e30a](https://via.placeholder.com/10/32e30a?text=+) #32e30a |
+| darkthird | ![#e64a19](https://via.placeholder.com/10/e64a19?text=+) #e64a19 |
+| dark | ![#00d1a0](https://via.placeholder.com/10/212121?text=+) #212121 |
+| light | ![#00d1a0](https://via.placeholder.com/10/F3F3F3?text=+) #F3F3F3 |
 
 
-
+<br>
 **Still in development**
