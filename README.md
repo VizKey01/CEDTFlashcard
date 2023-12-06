@@ -17,7 +17,7 @@
 
 <h4>- Using HTML, CSS, javascript For Frontend</h4>
 <h4>- Using javascript and nodejs For Backend</h4>
-<h4>- Using E2C AWS and MongoDB For Hosting and database</h4><br>
+<h4>- Using EC2 AWS and MongoDB For Hosting and database</h4><br>
 
 <p>Ex:</p>
 <a href="https://ibb.co/NVQmY50"><img src="https://i.ibb.co/FxN072Q/Screenshot-2023-11-25-151014.png" alt="Screenshot-2023-11-25-151014" border="0"></a>
